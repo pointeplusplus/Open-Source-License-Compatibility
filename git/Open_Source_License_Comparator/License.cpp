@@ -1,26 +1,24 @@
 #include <string>
 #include <vector>
+using namespace std;
 
 class License{
 
 private:
-	LicenseType name;
-	vector<LicenseAttributes> attributes;
-	string whyLicenseIncompatible;
-	string howToFollowOtherLicense;
-	bool canUseSoFar;
+	string name;
+	vector<string> permissions;
 	
-	public License(){
-		canUseSoFar = true;
+public:
+
+	License(){
 	}
 	
-	public License(int nameOrdinal){
-		canUseSoFar = true;
+	License(string l_name){
+		name = l_name;
 	}
 	
-	public License(LicenseType name){
-		canUseSoFar = true;
-		this.name = name;
+	string getName(){
+		return name;
 	}
 
 };

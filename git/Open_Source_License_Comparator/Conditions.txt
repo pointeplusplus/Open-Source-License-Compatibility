@@ -1,0 +1,6 @@
+distributing binaries
+modifying
+using for personal use
+using in another project
+relicensing
+educational purposes
