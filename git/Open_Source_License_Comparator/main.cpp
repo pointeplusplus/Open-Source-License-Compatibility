@@ -18,7 +18,11 @@ int main (int argc, char* argv[]){
 		cout << "Please enter license of your project and license of project you would like to use code from.  See README for more information" << endl;
 	}
 	
-	cout << argv[1] << argv[2] << endl;
+
+	string thisProjectLicenseName = argv[1];
+	string otherProjectLicenseName = argv[2];
+
+	cout << thisProjectLicenseName << " " << otherProjectLicenseName << endl;
 
 	ifstream in_str("LicenseNames.txt");
 	if(!in_str){
@@ -26,6 +30,20 @@ int main (int argc, char* argv[]){
 	}
 	vector<string> licenses;
 	readLicenseNames(in_str, licenses);
+	
+	License thisProjectLicense;
+	License otherProjectLicense;
+	
+	for(int l = 0; l < licenses.size(); l++){
+		if(licenses[l] == thisProjectLicenseName){
+			thisProjectLicense = License(thisProjectLicenseName);
+		}
+		else if (licenses[l] == otherProjectLicenseName){
+			otherProjectLicense = License(otherProjectLicense);
+		}
+	}
+	
+	cout << thisProjectLicense.getName() << " " << otherProjectLicense.getName() << endl;
 
 	return 1;
 }
