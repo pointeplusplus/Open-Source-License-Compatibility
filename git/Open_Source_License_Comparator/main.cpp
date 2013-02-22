@@ -31,15 +31,18 @@ int main (int argc, char* argv[]){
 	vector<string> licenses;
 	readLicenseNames(in_str, licenses);
 	
+	
 	License thisProjectLicense;
 	License otherProjectLicense;
 	
 	for(int l = 0; l < licenses.size(); l++){
 		if(licenses[l] == thisProjectLicenseName){
 			thisProjectLicense = License(thisProjectLicenseName);
+			cout << "found license 1" << endl;
 		}
-		else if (licenses[l] == otherProjectLicenseName){
-			otherProjectLicense = License(otherProjectLicense);
+		if (licenses[l] == otherProjectLicenseName){
+			otherProjectLicense = License(otherProjectLicenseName);
+			cout << "found license 2" << endl;
 		}
 	}
 	

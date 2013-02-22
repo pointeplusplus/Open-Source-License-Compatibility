@@ -22,5 +22,13 @@ public:
 	const string& getName() const{
 		return name;
 	}
+	
+	void addPermission(string permission){
+		permissions.push_back(permission);
+	}
+	
+	void addCondition(string condition){
+		conditions.push_back(condition);
+	}
 
 };
