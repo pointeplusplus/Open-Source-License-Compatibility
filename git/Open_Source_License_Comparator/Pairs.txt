@@ -1,0 +1,3 @@
+Apache-2.0 p reproduce
+GPL-3.0 p using
+BSD-3-Clause p selling

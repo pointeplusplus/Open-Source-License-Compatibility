@@ -9,7 +9,11 @@
 using namespace std;
 
 string CompareLicenses(License projectLicense, License exteralCode);
-void readLicenseNames(ifstream& in_str, vector<string> &licenses);
+
+//this is for license names, permissions, and conditions
+void readFileInfo(string fileName, vector<string> &licenses);
+
+void getPairs(ifstream& in_str, License& thisOne, License& otherOne);
 
 int main (int argc, char* argv[]){
 
@@ -24,12 +28,8 @@ int main (int argc, char* argv[]){
 
 	cout << thisProjectLicenseName << " " << otherProjectLicenseName << endl;
 
-	ifstream in_str("LicenseNames.txt");
-	if(!in_str){
-		cerr <<  "Problem reading the file LicenseNames.txt" << endl;
-	}
 	vector<string> licenses;
-	readLicenseNames(in_str, licenses);
+	readFileInfo("LicenseNames.txt", licenses);
 	
 	
 	License thisProjectLicense;
@@ -48,6 +48,11 @@ int main (int argc, char* argv[]){
 	
 	cout << thisProjectLicense.getName() << " " << otherProjectLicense.getName() << endl;
 
+	vector<string> conditionNames;
+	readFileInfo("Conditions.txt", conditionNames);
+	vector<string> permissionNames;
+	readFileInfo("Permissions.txt", permissionNames);
+	
 	return 1;
 }
 
@@ -60,12 +65,52 @@ string CompareLicenses(License projectLicense, License externalCode){
 	
 }
 
-void readLicenseNames(ifstream& in_str, vector<string> &licenses){
+void readFileInfo(string fileName, vector<string> &licenses){
+	ifstream in_str(fileName);
+	if(!in_str){
+		cerr <<  "Problem reading the file " << fileName << endl;
+	}
 	string temp = "";
 	while (!in_str.eof()) {
   		in_str >> temp;
   		licenses.push_back(temp);
   	}
+}
+
+void getPairs(ifstream& in_str, License& thisOne, License& otherOne){
+	string licenseName;
+	string infoType;
+	string info;
+	
+	while(!in_str.eof()){
+		in_str >> licenseName;
+		in_str >> infoType;
+		in_str >> info;
+		
+		if(licenseName == thisOne.getName()){
+			if(infoType == "p"){
+				thisOne.addPermission(info);
+			}
+			else if(infoType == "c"){
+				thisOne.addCondition(info);
+			}
+			else{
+				cerr << "Error in Pairs.txt file" << endl;
+			}
+		}
+		
+		else if(licenseName == otherOne.getName()){
+			if(infoType == "p"){
+				otherOne.addPermission(info);
+			}
+			else if(infoType == "c"){
+				otherOne.addCondition(info);
+			}
+			else {
+				cerr << "Error in Pairs.txt file" << endl;
+			}
+		}
+	}
 }
 
 
